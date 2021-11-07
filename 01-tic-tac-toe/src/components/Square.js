@@ -1,5 +1,5 @@
 import React from 'react';
-import '../App.css';
+import './Square.css';
 
 function Square({ val, chooseSquare }) {
     return (
