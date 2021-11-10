@@ -4,13 +4,14 @@ import { WinningCombinations } from '../WinningCombinations';
 import './Board.css';
 
 function Board(props) {
-    const [board, setBoard] = useState(Array(9).fill(''));
+    const [board, setBoard] = useState([Array(9).fill('')]);
     const [player, setPlayer] = useState('X');
     const [winner, setWinner] = useState(null);
 
     useEffect(() => {
         checkWinner();
         checkIfTie();
+        // eslint-disable-next-line
     }, [board]);
 
     useEffect(() => {
