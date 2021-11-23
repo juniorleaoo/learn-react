@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30 dias de react</title>
+
+    <style>
+        /* == General style === */
+        * {
+          box-sizing: border-box;
+          padding: 0;
+          margin: 0;
+        }
+  
+        html,
+        body {
+          height: 100%;
+          line-height: 1.5;
+          font-family: 'Montserrat';
+          font-weight: 300;
+          color: black;
+        }
+  
+        .root {
+          min-height: 100%;
+          position: relative;
+        }
+  
+        .header-wrapper,
+        .main-wrapper,
+        .footer-wrapper {
+          width: 85%;
+          margin: auto;
+        }
+  
+        .header-wrapper,
+        .main-wrapper {
+          padding: 10px;
+          margin: 2px auto;
+        }
+  
+        h1 {
+          font-size: 70px;
+          font-weight: 300;
+        }
+  
+        h2,
+        h3 {
+          font-weight: 300;
+        }
+  
+        header {
+          background-color: #61dbfb;
+          padding: 10px;
+        }
+  
+        main {
+          padding: 10px;
+          padding-bottom: 60px;
+          /* Height of the footer */
+        }
+  
+        ul {
+          margin-left: 15px;
+        }
+  
+        ul li {
+          list-style: none;
+        }
+  
+        footer {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 60px;
+          /* Height of the footer */
+          background: #6cf;
+        }
+  
+        .footer-wrapper {
+          font-weight: 400;
+          text-align: center;
+          line-height: 60px;
+        }
+      </style>
+</head>
+
+<body>
+    <div class="root"></div>
+
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+        const rootElement = document.querySelector('.root')
+        const welcome = 'Bem-vindo'
+        const title = 'Iniciando no react'
+        const subtitle = 'Aprendendo o react'
+        const author = {
+            name: 'Junior',
+            lastName: 'Leão'
+        }
+        const date = new Date();
+
+        const header = (
+            <header>
+                <div className="header-wrapper">
+                    <h1>{welcome}</h1>
+                    <h2>{title}</h2>
+                    <h3>{subtitle}</h3>
+                    <p>
+                        {author.name} {author.lastName}
+                    </p>
+                    <small>
+                        {date.getDate()}/{date.getMonth()}/{date.getFullYear()}
+                    </small>
+                </div>
+            </header>
+        )
+
+        const age = date.getFullYear() - 1994
+
+        const main = (
+            <main>
+                <div className='main-wrapper'>
+                    <p>
+                        Pré-requisitos para inicar {' '}
+                        <strong>
+                            <em>react.js</em>
+                        </strong>
+                        :
+                    </p>
+                    <ul>
+                        {
+                            ['HTML', 'CSS', 'JavaScript'].map((tech) => <li key={tech}>{tech}</li>)
+                        }
+                    </ul>
+                    <p>1 + 2 = {1 + 2}</p>
+                    {
+                        <p>
+                            {' '}
+                            {author.name} {author.lastName} tem {age} anos
+                        </p>
+                    }
+                </div>
+            </main>
+        )
+
+        const footer = (
+            <footer>
+                <div className="footer-wrapper">
+                    <p>Copyright {date.getFullYear()}</p>
+                </div>
+            </footer>
+        )
+
+        const app = (
+            <div className="app">
+                {header}
+                {main}
+                {footer}
+            </div>
+        )
+
+        ReactDOM.render(app, rootElement)
+    </script>
+
+</body>
+
+</html>
