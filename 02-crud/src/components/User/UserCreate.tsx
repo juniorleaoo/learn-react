@@ -1,20 +1,20 @@
 import { Component, FormEvent } from "react";
 import { Navigate } from "react-router";
-import UsuarioService from "../../service/usuario.service";
+import UserService from "../../service/user.service";
 
-type UsuarioForm = {
-    nome: string;
+type UserForm = {
+    name: string;
     email: string;
     redirect: boolean;
 }
 
-class UserCreate extends Component<{}, UsuarioForm> {
+class UserCreate extends Component<{}, UserForm> {
 
     constructor(props: any) {
         super(props);
 
         this.state = {
-            nome: '',
+            name: '',
             email: '',
             redirect: false
         };
@@ -23,11 +23,11 @@ class UserCreate extends Component<{}, UsuarioForm> {
 
     handleSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const { nome, email } = this.state;
+        const { name, email } = this.state;
 
-        if (nome && email) {
-            UsuarioService.adicionar({
-                nome: this.state.nome,
+        if (name && email) {
+            UserService.add({
+                name: this.state.name,
                 email: this.state.email
             });
 
@@ -54,7 +54,7 @@ class UserCreate extends Component<{}, UsuarioForm> {
                     <label htmlFor="nome" className="form-label">Nome</label>
                     <input type="text" className="form-control"
                         id="nome" placeholder="Digite o nome" required
-                        onChange={(e) => this.setState({ nome: e.target.value })} />
+                        onChange={(e) => this.setState({ name: e.target.value })} />
                 </div>
 
                 <div className="mb-3">

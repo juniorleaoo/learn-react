@@ -1,15 +1,15 @@
 import React, { FormEvent, useState } from "react";
 import { useParams } from "react-router";
-import { Usuario } from "../../models/Usuario";
-import UsuarioService from "../../service/usuario.service";
+import { User } from "../../models/User";
+import UserService from "../../service/user.service";
 
 const UserEdit: React.FC = () => {
     const { id } = useParams() as { id: string };
 
-    const [usuario, setUsuario] = useState<Usuario>({
-        ...UsuarioService.consultar(+id) ?? {
+    const [user, setUser] = useState<User>({
+        ...UserService.get(+id) ?? {
             id: +id,
-            nome: '',
+            name: '',
             email: ''
         }
     });
@@ -17,10 +17,10 @@ const UserEdit: React.FC = () => {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const { nome, email } = usuario;
+        const { name, email } = user;
 
-        if (nome && email) {
-            UsuarioService.atualizar(usuario);
+        if (name && email) {
+            UserService.update(user);
 
             alert('Usuário alterado com sucesso!');
         }
@@ -33,16 +33,16 @@ const UserEdit: React.FC = () => {
                 <label htmlFor="nome" className="form-label">Nome</label>
                 <input type="text" className="form-control"
                     id="nome" placeholder="Digite o nome" required
-                    value={usuario.nome}
-                    onChange={(e) => setUsuario({ ...usuario, nome: e.target.value })} />
+                    value={user.name}
+                    onChange={(e) => setUser({ ...user, name: e.target.value })} />
             </div>
 
             <div className="mb-3">
                 <label htmlFor="email" className="form-label">E-mail</label>
                 <input type="email" className="form-control"
                     id="email" placeholder="Digite o e-mail" required
-                    value={usuario.email}
-                    onChange={(e) => setUsuario({ ...usuario, email: e.target.value })} />
+                    value={user.email}
+                    onChange={(e) => setUser({ ...user, email: e.target.value })} />
             </div>
 
             <button type="submit" className="btn btn-primary">Salvar</button>

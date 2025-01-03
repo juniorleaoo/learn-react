@@ -1,30 +1,30 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import { Usuario } from "../../models/Usuario";
-import UsuarioService from "../../service/usuario.service";
+import { User } from "../../models/User";
+import UserService from "../../service/user.service";
 
-class UserList extends Component<{}, { usuarios: Usuario[] }> {
+class UserList extends Component<{}, { users: User[] }> {
 
     constructor(props: any) {
         super(props);
 
         this.state = {
-            usuarios: []
+            users: []
         };
     }
 
     componentDidMount() {
-        const usuarios = UsuarioService.listarTodos();
-        this.setState({ usuarios: usuarios });
+        const users = UserService.findAll();
+        this.setState({ users });
     }
 
-    deletarUsuario(id: number) {
-        UsuarioService.deletar(id);
-        this.setState({ usuarios: UsuarioService.listarTodos() });
+    deleteUser(id: number) {
+        UserService.deleteById(id);
+        this.setState({ users: UserService.findAll() });
     }
 
     render() {
-        const { usuarios } = this.state;
+        const { users } = this.state;
 
         return (
             <div className="container-fluid">
@@ -50,18 +50,18 @@ class UserList extends Component<{}, { usuarios: Usuario[] }> {
                         </tr>
                     </thead>
                     <tbody>
-                        {usuarios.map(usuario => {
+                        {users.map(user => {
                             return (
                                 <tr>
-                                    <td>{usuario.id}</td>
-                                    <td>{usuario.nome}</td>
-                                    <td>{usuario.email}</td>
+                                    <td>{user.id}</td>
+                                    <td>{user.name}</td>
+                                    <td>{user.email}</td>
                                     <td>
                                         <div className="btn-group" role="group">
-                                            <Link to={`/users/edit/${usuario.id}`}>
+                                            <Link to={`/users/edit/${user.id}`}>
                                                 <button type="button" className="btn btn-primary">Editar</button>
                                             </Link>
-                                            <button type="button" className="btn btn-danger" onClick={() => this.deletarUsuario(usuario.id)}>Excluir</button>
+                                            <button type="button" className="btn btn-danger" onClick={() => this.deleteUser(user.id)}>Excluir</button>
                                         </div>
                                     </td>
                                 </tr>
