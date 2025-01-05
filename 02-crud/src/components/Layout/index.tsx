@@ -7,7 +7,7 @@ class Layout extends Component {
     render() {
         return (
             <div>
-                <Navbar />
+                <Navbar /> 
                 <div className="container">
                     <Outlet />
                 </div>
